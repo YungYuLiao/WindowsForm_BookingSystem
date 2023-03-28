@@ -4,6 +4,7 @@
 1. 使用ADO.NET技術存取和操作資料庫
 2. 將連線資料庫、執行SQL Server資料庫的通用操作及創建SqlParameter對象的集合寫成Utility.dll(分別為SqlDbHelper及SqlParameterBuilder)
 3. 以ViewModel提供用戶界面所需的數據和邏輯，並在UserService連接資料庫
+4. 從資料庫中返回的資料為多筆時，以IEnumerable<T>泛型介面回傳，開發人員可以根據自己的需要選擇轉換成List<T>或Array等型別，可以減少記憶體佔用，並提高效能
 
 ## 會員登入、註冊、修改會員資料、登出
 1. 撰寫ValidationHelper類別，用於顯示輸入表單操作是否通過驗證，錯誤則會調用DisplayErrorByErrorProvider方法，在界面上顯示驗證錯誤
