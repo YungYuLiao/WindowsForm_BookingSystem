@@ -1,6 +1,6 @@
 # 觀紫民宿訂房系統
 
-**Keyword: windowsform、OOP、兩層式架構(客戶端的使用者介面層與伺服器端的資料服務層)**
+**Keyword: windowsform、ADO.NET、OOP、兩層式架構(客戶端的使用者介面層與伺服器端的資料服務層)**
 1. 使用ADO.NET技術存取和操作資料庫
 2. 將連線資料庫、執行SQL Server資料庫的通用操作及創建SqlParameter對象的集合寫成Utility.dll(分別為SqlDbHelper及SqlParameterBuilder)
 3. 以ViewModel提供用戶界面所需的數據和邏輯，並在UserService連接資料庫
