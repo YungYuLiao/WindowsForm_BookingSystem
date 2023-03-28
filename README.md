@@ -22,7 +22,7 @@
 
 ## 主頁
   
-![Recording 2023-03-28 at 16 24 29](https://user-images.githubusercontent.com/115922701/228177318-a4d533ff-8650-41d5-b33d-a1fc4820c628.gif)
+![Recording 2023-03-28 at 16 36 41](https://user-images.githubusercontent.com/115922701/228178699-89b997b9-7cf3-4f8d-8f6e-5e42ecb0a2c8.gif)
 
 1. 主頁為主視窗，為各子視窗設置MdiParent屬性
 2. 撰寫ChangeImage方法，利用switch語法達成按左右按鍵時改變case，實作出變更照片及房型敘述的效果
