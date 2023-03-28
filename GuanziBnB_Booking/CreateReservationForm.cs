@@ -29,7 +29,8 @@ namespace GuanziBnB_Booking
 		{
 			InitializeComponent();
 			chkAddBed.Enabled = false;
-			this.user_id = user_id;	
+			this.user_id = user_id;
+			btnSelect.Enabled = false;
 		}
 
 		private void CreateReservationForm_Load(object sender, EventArgs e)
@@ -40,11 +41,8 @@ namespace GuanziBnB_Booking
 			{
 				this.Close();
 			}
-			lblAvailable1.Text = string.Empty;
-			lblAvailable2.Text = string.Empty;
-			lblAvailable3.Text = string.Empty;
-			lblAvailable4.Text = string.Empty;
 
+			lblAvailableInit();
 			Initrdobtn();
 			DisplayCart(user_id);
 
@@ -63,11 +61,9 @@ namespace GuanziBnB_Booking
 
 		private void btnSerach_Click(object sender, EventArgs e)
 		{
-			//chkAddBed.Enabled = false;
-			lblAvailable1.Text = string.Empty;
-			lblAvailable2.Text = string.Empty;
-			lblAvailable3.Text = string.Empty;
-			lblAvailable4.Text = string.Empty;
+
+			lblAvailableInit();
+
 			DateTime endDate = dtpEndDate.Value.Date;
 			DateTime startDate = dtpStartDate.Value.Date;
 			TimeSpan sevenDays = new TimeSpan(7,0,0,0);
@@ -87,10 +83,9 @@ namespace GuanziBnB_Booking
 				MessageBox.Show("訂房時間不可超過一星期", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
-			rdo1.Visible = true;
-			rdo2.Visible = true;
-			rdo3.Visible = true;
-			rdo4.Visible = true;
+
+			//查詢後才可顯示radiobtn
+			radiobtnVisibleTrue();
 			radiobtnVisibleFalse();
 			FindAvailable();
 			
@@ -101,7 +96,26 @@ namespace GuanziBnB_Booking
 				item.Checked = false;
 			}
 			chkAddBed.Enabled = false;
+			
+			
+
 			return;
+		}
+
+		private void radiobtnVisibleTrue()
+		{
+			rdo1.Visible = true;
+			rdo2.Visible = true;
+			rdo3.Visible = true;
+			rdo4.Visible = true;
+		}
+
+		private void lblAvailableInit()
+		{
+			lblAvailable1.Text = string.Empty;
+			lblAvailable2.Text = string.Empty;
+			lblAvailable3.Text = string.Empty;
+			lblAvailable4.Text = string.Empty;
 		}
 
 		private void FindAvailable()
@@ -168,14 +182,17 @@ namespace GuanziBnB_Booking
 			int user_id = this.user_id;
 			RadioButton[] control = { rdo1, rdo2, rdo3, rdo4 };
 			int room_id = 0;
+
+
 			for (int i = 0; i < control.Length; i++)
 			{
 				if (control[i].Checked == true)
 				{
+					btnSelect.Enabled = false;
 					room_id = i + 1;
 				}
 			}
-				//繫結
+			//繫結
 			CartVM model = new CartVM()
 			{
 				Room_id = room_id,
@@ -259,6 +276,7 @@ namespace GuanziBnB_Booking
 				MessageBox.Show("尚未選取欲預定時間及房型", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
+
 			//取得付款資訊
 
 			string remitName = txtRemitName.Text;
@@ -338,6 +356,9 @@ namespace GuanziBnB_Booking
 				control[i].Visible = true;
 
 			}
+
+			chkAddBed.Enabled = false;
+			btnSelect.Enabled = false;
 			FindAvailable();
 			
 			this.DialogResult = DialogResult.OK;
@@ -351,27 +372,34 @@ namespace GuanziBnB_Booking
 
 		private void rdo1_Click(object sender, EventArgs e)
 		{
-			chkAddBed.Enabled = true;
+			btnEnable();
+			
 		}
 
 		private void rdo2_CheckedChanged(object sender, EventArgs e)
 		{
-			chkAddBed.Enabled = true;
+			btnEnable();
 		}
 
 		private void rdo3_CheckedChanged(object sender, EventArgs e)
 		{
-			chkAddBed.Enabled = true;
+			btnEnable();
 		}
 
 		private void rdo4_CheckedChanged(object sender, EventArgs e)
 		{
-			chkAddBed.Enabled = true;
+			btnEnable();
 		}
 
 		private void dataGridView1_SelectionChanged(object sender, EventArgs e)
 		{
 			dataGridView1.ClearSelection();
+		}
+
+		private void btnEnable()
+		{
+			chkAddBed.Enabled = true;
+			btnSelect.Enabled = true;
 		}
 	}
 }

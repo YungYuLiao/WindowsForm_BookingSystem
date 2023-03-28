@@ -33,9 +33,7 @@ namespace GuanziBnB_Booking.Models.Services
 			return new ReservationIndexVM()
 			{
 
-				//Reservation_id = row.Field<int>("Reservation_id"),
 				Order_id = row.Field<int>("Order_id"),
-				//Name = row.Field<string>("Name"),
 				Start_date = row.Field<DateTime>("Start_date"),
 				End_date = row.Field<DateTime>("End_date"),
 				Create_at = row.Field<DateTime>("Create_at").ToString("yyyy/MM/dd HH:mm:ss"),
@@ -123,6 +121,7 @@ namespace GuanziBnB_Booking.Models.Services
                            join Room on r.Room_id = Room.Room_id
                            join Room_Detail rd on Room.Room_type_id = rd.Room_type_id 
                            where (r.Reservation_id = @Reservation_id)";
+
 			var param = new SqlParameterBuilder()
 						.AddInt("Reservation_id", reservation_id)
 						.Build();
@@ -150,7 +149,7 @@ namespace GuanziBnB_Booking.Models.Services
 
 		public PaymentIndexVM GetPayment(int order_id)
 		{
-			string sql = @"select * from [Order] o join Payment p on o.Order_id = p.Order_id
+			string sql = @"Select * from [Order] o join Payment p on o.Order_id = p.Order_id
                            where o.Order_id = @Order_id";
 			var param = new SqlParameterBuilder()
 						.AddInt("Order_id", order_id)
@@ -185,7 +184,7 @@ namespace GuanziBnB_Booking.Models.Services
 
 		public IEnumerable<ReservationVM> GetAvailable(DateTime startDate)
 		{
-			string sql = @"select * from Reservation where Start_date = @Start_date And CancelStatus = 0";
+			string sql = @"Select * from Reservation where Start_date = @Start_date And CancelStatus = 0";
 			var param = new SqlParameterBuilder()
 						.AddDateTime("Start_date", startDate)
 						.Build();
@@ -238,6 +237,7 @@ namespace GuanziBnB_Booking.Models.Services
 							.AddInt("AddBed", model.AddBed)
 							.AddInt("Room_id", model.Room_id)
 							.Build();
+
 				new SqlDbHelper("default").ExecuteNonQuery(sql, param);
 			
 		}
